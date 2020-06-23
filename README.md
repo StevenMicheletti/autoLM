@@ -7,12 +7,12 @@ autoLM determines correlations between allele frequencies and environmental meas
 
 ### Input
 
-There are two primary input files and one optional file:
-1) Allele frequencies for each population, tab deliminted 
-    Format: First column is population name, following columns are allele frequencies for each SNP
-2) Measures of environmental variables for each population
-    Format: Rows correspond to populations, in the same order as file 1. Do not include population names. Following columns are raw environmental measures for each population.
-3) Population coordinates, in meters (optional), tab deliminted 
+There are two primary input files and one optional file (see example files):
+1) Allele frequencies for each population, tab deliminted <br>
+    Format: First column is population name, following columns are allele frequencies for each SNP. 
+2) Measures of environmental variables for each population <br>
+    Format: Rows correspond to populations, in the same order as file 1. Do not include population names. Following columns are raw environmental measures for each population. 
+3) Population coordinates, in meters (optional), tab deliminted  <br>
     Format: First column is population name, second column is genetic cluster (integer), third is east (meters), fourth is north (meters). 
     
 
