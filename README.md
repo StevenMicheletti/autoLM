@@ -3,7 +3,7 @@ Gene-environment association test using spatial autocorreltation
 
 ## Summary
 
-autoLM determines correlations between allele frequencies and environmental measures. It will use simple linear regrestion to determine strongest  GEA correlations. If genetic cluster and population coordinates are included, autoLM uses spatial autocorrelation and population structure as random variables.
+autoLM determines correlations between allele frequencies and environmental measures. It will use simple linear regrestion to determine strongest  GEA correlations. If genetic cluster and population coordinates are included, autoLM uses spatial autocorrelation and population structure as random variables to predict GEAs.
 
 ### Input
 
