@@ -22,12 +22,13 @@ coords.input = args[10]
 
 if (is.na(fnameo) ==  T){
  print("Not running via shell wrapper, variables must be included in Rscript")
- fnameo = 'test.txt'
+ fnameo = 'autoLM.out'
  env.input = 'env.txt'
  freq.input = 'all_freq.txt'
  standardize = TRUE
- coords.input = NULL # 'locations.txt' 
+ coords.input = 'locations.txt' # set to "nope" if not interested
 }
+
 
 
 autolm <- function(fnameo,
@@ -44,7 +45,7 @@ autolm <- function(fnameo,
   }
   
   # Population, clust, east, north 
-  if (!is.null(coords.input)) {
+  if (file.exists(coords.input)) {
     c.data <- fread(coords.input, header=TRUE)
     if (ncol(c.data) < 4) stop ("Coordinate file has too many columns. 
               Make sure it is tab delimited and includes: Pop Name, genetic cluster, east (m), north (m)")
@@ -72,6 +73,7 @@ autolm <- function(fnameo,
 
   vpop = as.numeric(nrow(f.data))
   epop = as.numeric(ncol(f.data))
+  env = as.numeric(ncol(e.data))
   
   Snp <- list()
   for (j in 1:epop) {
@@ -90,9 +92,9 @@ autolm <- function(fnameo,
   write.table(out.headerz, file= fnameo, sep='\t', col.names = F, row.names = F, quote = F)
   
 
-  if (!is.null(coords.input)) {            
+  if (file.exists(coords.input)) {            
     print ("Coordinates and clusters provided as random effects: Running model")
-    for (i in 1:epop) { 
+    for (i in 1:env) { 
      test <- as.vector(Var[[i]])
      ci <- names(Var[i])
      for (j in 1:vpop) { 
@@ -129,9 +131,9 @@ autolm <- function(fnameo,
     return(p)
   }
   
-  if (is.null(coords.input)) {
+  if (is.null(coords.input) | (!file.exists(coords.input))) {
     print ("No coordinates provided, there will be no random effects: Running model")
-    for (i in 1:epop) { 
+    for (i in 1:env) { 
       test <- as.vector(e.data[[i]])
       ci <- colnames(e.data[i])
       for (j in 1:vpop) { 
@@ -160,4 +162,3 @@ autolm <- function(fnameo,
   }
 
 autolm(fnameo, env.input, freq.input, standardize, coords.input)
-
